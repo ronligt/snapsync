@@ -1,5 +1,26 @@
 #!/bin/bash
 
+function usage {
+    echo "snapsync"
+    echo ""
+    echo "usage: $(basename $0) <SOURCE DIR> <SNAPSYNC DIR>"
+    echo "  <SOURCE DIR>      all files and directories in this directory will be backuped"
+    echo "  <SNAPSYNC DIR>    location where all backups will be stored"
+    echo ""
+    echo "description: Backup solution with snapshots using hard links"
+    echo ""
+    echo "With every call of snapsync a copy of the previous snapshot is created"
+    echo "using hard links after which all modifications are synchronised [via rsync]."
+    echo "Each snapshot is stored with its creation date and a softlink named 'last'"
+    echo "points to the latest snapshot"
+}
+
+if [ $# != 2 ];
+then
+  usage
+  exit 1
+fi
+
 START=`date +%s`
 
 SCRIPTDIR=$(dirname $0)
