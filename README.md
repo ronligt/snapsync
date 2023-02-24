@@ -25,11 +25,11 @@ All files in the snapshots are added to a local `locate` database enabling users
    45 * * * * cleanup.sh /snapsync/home >> /snapsync/home/snapsync.log
    ```
 
-For the exact usage of the script run the scripts `snapsync.sh` and `cleanup.sh` with arguments to get more information.
+For the exact usage of the script run the scripts [`snapsync.sh`](snapsync.sh) and [`cleanup.sh`](cleanup.sh) with arguments to get more information.
 
 Runtime errors are added to `error.log` inside the snapsync directory.
 
-A sample `logrotate` script (`logrotate_snapsync`) is included which can be saved in `/etc/logrotate.d/snapsync`.
+A sample `logrotate` script ([`logrotate_snapsync`](logrotate_snapsync)) is included which can be saved in `/etc/logrotate.d/snapsync`.
 
 ## Locate
 
@@ -57,4 +57,4 @@ locate --database=/snapsync/home/mlocate.db -b <filename>
  of this license document, but changing it is not allowed.
 ```
 
-Please read the `LICENSE` file for more information.
+Please read the [`LICENSE`](LICENSE) file for more information.
