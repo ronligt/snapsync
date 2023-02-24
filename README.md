@@ -33,7 +33,7 @@ A sample `logrotate` script (`logrotate_snapsync`) is included which can be save
 
 ## Locate
 
-After each modification to the snapsync system the `locate` database (`mlocate.db` is updated. This allows users to find their files and/or directory using the following command:
+After each modification to the snapsync system the `locate` database (`mlocate.db`) is updated. This allows users to find their files and/or directory using the following command:
 
 ```bash
 locate --database=/snapsync/home/mlocate.db -b <filename>
