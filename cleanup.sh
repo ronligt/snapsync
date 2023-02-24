@@ -67,7 +67,7 @@ function usage {
     echo "according to the retention scheme. Only the following snapshots are kept:"
     echo "1. the oldest one"
     echo "2. the first backup in a month"
-    echo "3. Every $DOW [SNAPSYNC_DOW] of the last $MAXWEEK [SNAPSYNC_MAXWEEK] weeks"
+    echo "3. the first backup on every $DOW [SNAPSYNC_DOW] of the last $MAXWEEK [SNAPSYNC_MAXWEEK] weeks"
     echo "4. Every first backup of the last $MAXDAY [SNAPSYNC_MAXDAY] days"
     echo "5. Every backup in the last $(echo $MAXHOUR*24 | bc) [SNAPSYNC_MAXHOUR] hours"
     echo "note: the retention scheme can be easily modified using the environment"

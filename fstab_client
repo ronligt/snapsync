@@ -1,1 +1,0 @@
-snapsync_server:/snapsync       /snapsync       nfs     rw,bg,hard,intr,nosuid

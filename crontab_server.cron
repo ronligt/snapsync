@@ -1,3 +1,0 @@
-MAILTO=<your e-mail address>
-# m h  dom mon dow   command
-15 1 * * 0 /snapsync/snapsync/weekly_cleanup.sh

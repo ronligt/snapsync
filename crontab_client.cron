@@ -1,4 +1,0 @@
-MAILTO=<your e-mail address>
-15 1 * * 1-6 /snapsync/snapsync/snapsync.sh /storage/no_quota /snapsync/noquota >> /snapsync/noquota/snapsync.log
-15 18 * * 1-6 /snapsync/snapsync/snapsync.sh /storage/with_quota /snapsync/withquota >> /snapsync/withquota/snapsync.log
-
