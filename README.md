@@ -46,6 +46,10 @@ locate --database=/snapsync/home/mlocate.db -b <filename>
 * `rsync`
 * `updatedb` (part of `locate`)
 
+## Separating source and backup
+
+This system allows for easy separation of the source hardware and snapsync (backup) hardware. As the system will always copy new or modified files via `rsync` these copies can also be stored on attached external devices like usb-disks or network storages. Note that the [`snapsync.sh`](snapsync.sh) script must be run on the source system and the [`cleanup.sh`](cleanup.sh) script can be run on the snapsync system.
+
 ## License and Copyright
 
 ```raw
