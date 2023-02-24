@@ -3,10 +3,57 @@
 SCRIPTNAME=$(basename $0)
 SCRIPTDIR=$(dirname $0)
 
+# Default settings for retention scheme
 DOW="Friday"  # which weekday must be kept
 MAXWEEK=52    # how many weekdays must be kept
 MAXDAY=31     # how many days must be kept
 MAXHOUR=1     # how many hours must be kept: MAXHOUR*24 hours
+
+# Get env var if given
+DOW="${SNAPSYNC_DOW:-$DOW}"
+MAXWEEK="${SNAPSYNC_MAXWEEK:-$MAXWEEK}"
+MAXDAY="${SNAPSYNC_MAXDAY:-$MAXDAY}"
+MAXHOUR="${SNAPSYNC_MAXHOUR:-$MAXHOUR}"
+
+# Ya gotta have limits!
+WEEKDAYS="Monday Tuesday Wednesday Thursday Friday Saturday Sunday"
+MAX_MAXWEEK=52 # one year
+MAX_MAXDAY=365 # one year
+MAX_MAXHOUR=168 # one week
+
+# Check if var is in list
+function exists_in_list() {
+    LIST=$1
+    DELIMITER=$2
+    VALUE=$3
+    [[ "$LIST" =~ ($DELIMITER|^)$VALUE($DELIMITER|$) ]]
+}
+if ! exists_in_list "$WEEKDAYS" " " $DOW ; then
+  echo "Error: DOW is not in list [$WEEKDAYS]" >&2; exit 1
+fi
+# Check if var is number
+re='^[0-9]+$'
+if ! [[ $MAXWEEK =~ $re ]] ; then
+  echo "Error: MAXWEEK is not a number" >&2; exit 1
+else
+  if ! [ "$MAXWEEK" -ge 0 ] && [ "$MAXWEEK" -le "$MAX_MAXWEEK" ] ; then
+    echo "Error: MAXWEEK is not in range [0-$MAX_MAXWEEK]" >&2; exit 1
+  fi
+fi
+if ! [[ $MAXDAY =~ $re ]] ; then
+  echo "Error: MAXDAY is not a number" >&2; exit 1
+else
+  if ! [ "$MAXDAY" -ge 0 ] && [ "$MAXDAY" -le "$MAX_MAXDAY" ] ; then
+    echo "Error: MAXWEEK is not in range [0-$MAX_MAXDAY]" >&2; exit 1
+  fi
+fi
+if ! [[ $MAXHOUR =~ $re ]] ; then
+  echo "Error: MAXHOUR is not a number" >&2; exit 1
+else
+  if ! [ "$MAXHOUR" -ge 0 ] && [ "$MAXHOUR" -le "$MAX_MAXHOUR" ] ; then
+    echo "Error: MAXHOUR is not in range [0-$MAX_MAXHOUR]" >&2; exit 1
+  fi
+fi
 
 function usage {
     echo "$SCRIPTNAME"
