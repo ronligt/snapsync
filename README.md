@@ -2,7 +2,7 @@
 
 The **snapsync** system is a backup system that creates hourly snapshots (backups) of a given directory using hard links to files in snapshots created earlier to save storage. New or modified files are included in the snapshot and removed files are deleted from the snapshot.
 
-A cleanup script is included to preserve snapshots via a retention scheme. By default this scheme keeps the following snapshots:
+A cleanup script is included to preserve snapshots via a retention scheme. By default this scheme only keeps the following snapshots:
 
 1. the oldest one
 1. the first backup in a month
