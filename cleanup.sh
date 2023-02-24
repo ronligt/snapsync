@@ -5,8 +5,8 @@ SCRIPTDIR=$(dirname $0)
 
 # Default settings for retention scheme
 DOW="Friday"  # which weekday must be kept
-MAXWEEK=52    # how many weekdays must be kept
-MAXDAY=31     # how many days must be kept
+MAXWEEK=4    # how many weekdays must be kept
+MAXDAY=7     # how many days must be kept
 MAXHOUR=1     # how many hours must be kept: MAXHOUR*24 hours
 
 # Get env var if given
