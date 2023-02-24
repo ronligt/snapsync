@@ -184,6 +184,7 @@ done
 # HOURS, keep last $MAXHOUR*24 hours
 findstr=$(echo $findstr " ! -mtime -$MAXHOUR")
 
+echo "Removing:"
 find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
 # echo $findstr
 # find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
