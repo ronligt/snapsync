@@ -12,7 +12,7 @@ A cleanup script is included to preserve snapshots via a retention scheme. By de
 
 Using the environment variables given inside the square brackets in the rules above you can modify this scheme.
 
-All files in the snapshots are added to a local database enabling users to find their files ([Locate](#locate))
+All files in the snapshots are added to a local `locate` database enabling users to find their files ([Locate](#locate)).
 
 ## Usage
 
