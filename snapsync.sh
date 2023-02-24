@@ -15,7 +15,8 @@ function usage {
     echo "With every call of $SCRIPTNAME a copy of the previous snapshot is created"
     echo "using hard links after which all modifications are synchronised via rsync."
     echo "Each snapshot is stored with its creation date. A softlink named 'last'"
-    echo "points to the latest snapshot"
+    echo "points to the latest snapshot. After each snapshot the locate database is"
+    echo "updated."
 }
 
 if [ $# != 2 ];
