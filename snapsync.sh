@@ -70,7 +70,7 @@ if [ -e $LNK ]; then
 fi
 
 rsync -ax --stats -h --delete $SRC/ $DST 2> $PREFIX/error.log
-echo_lap $LAP "rsyncing"
+echo_lap $START "rsyncing"
 
 touch $DST
 

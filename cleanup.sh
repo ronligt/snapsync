@@ -187,7 +187,7 @@ findstr=$(echo $findstr " ! -mtime -$MAXHOUR")
 find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
 # echo $findstr
 # find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
-echo_lap $LAP "removing directories outside retention scheme"
+echo_lap $START "cleaning up"
 
 updatedb -U $PREFIX -o $MDB
 echo_lap $LAP "updating mlocate.db"
