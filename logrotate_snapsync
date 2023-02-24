@@ -1,4 +1,4 @@
-/snapsync/*.log {
+/snapsync/home/*.log {
     rotate 3
 	monthly
 	missingok
