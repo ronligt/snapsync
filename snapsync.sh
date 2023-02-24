@@ -47,7 +47,7 @@ date
 if [ -e $LCK ]; then
   DATE=`date -r $LCK`
   SCRIPT=`cat $LCK`
-  echo "Error: lockfile $LCK exists! Most likely the $SCRIPT script is allready running." >&2
+  echo "Error: lockfile $LCK exists! Most likely the $SCRIPT script is already running." >&2
   echo "       This lockfile is created on: $DATE" >&2
   exit 1
 else
