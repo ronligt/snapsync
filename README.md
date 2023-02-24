@@ -12,6 +12,8 @@ A cleanup script is included to preserve snapshots via a retention scheme. By de
 
 Using the environment variables given inside the square brackets in the rules above you can modify this scheme.
 
+All files in the snapshots are added to a local database enabling users to find their files ([Locate](#locate))
+
 ## Usage
 
 1. create a `snapsync` directory for all snapshots, e.g. `/snapsync`
@@ -28,6 +30,14 @@ For the exact usage of the script run the scripts `snapsync.sh` and `cleanup.sh`
 Runtime errors are added to `error.log` inside the snapsync directory.
 
 A sample `logrotate` script (`logrotate_snapsync`) is included which can be saved in `/etc/logrotate.d/snapsync`.
+
+## Locate
+
+After each modification to the snapsync system the `locate` database (`mlocate.db` is updated. This allows users to find their files and/or directory using the following command:
+
+```bash
+locate --database=/snapsync/home/mlocate.db -b <filename>
+```
 
 ## Dependencies
 
