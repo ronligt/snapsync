@@ -85,6 +85,7 @@ if ! [ -d $PREFIX ] ; then
   echo "Error: directory $PREFIX does not exist" >&2; exit 1
 fi
 LCK=$PREFIX/lock
+MDB=$PREFIX/mlocate.db
 
 # determine laptime and echo result
 #   $1 = start time for lap
@@ -183,9 +184,13 @@ done
 # HOURS, keep last $MAXHOUR*24 hours
 findstr=$(echo $findstr " ! -mtime -$MAXHOUR")
 
-#find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
-echo $findstr
-find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
+find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
+# echo $findstr
+# find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
+echo_lap $LAP "removing directories outside retention scheme"
+
+updatedb -U $PREFIX -o $MDB
+echo_lap $LAP "updating mlocate.db"
 
 echo_lap $START "total script"
 
