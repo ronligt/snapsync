@@ -82,7 +82,7 @@ fi
 
 PREFIX=$1
 if ! [ -d $PREFIX ] ; then
-  echo "Error: directory $PREFIX does not exist" >&2; exit 1
+  echo "Error: snapsync directory $PREFIX does not exist" >&2; exit 1
 fi
 LCK=$PREFIX/lock
 MDB=$PREFIX/mlocate.db

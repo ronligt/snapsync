@@ -26,7 +26,14 @@ then
 fi
 
 SRC=$1
+if ! [ -d $SRC ] ; then
+  echo "Error: source directory $SRC does not exist" >&2; exit 1
+fi
+
 PREFIX=$2
+if ! [ -d $PREFIX ] ; then
+  echo "Error: snapsync directory $PREFIX does not exist" >&2; exit 1
+fi
 LNK=$PREFIX/last
 LCK=$PREFIX/lock
 MDB=$PREFIX/mlocate.db
