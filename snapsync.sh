@@ -10,8 +10,8 @@ function usage {
     echo "description: Backup solution with snapshots using hard links"
     echo ""
     echo "With every call of snapsync a copy of the previous snapshot is created"
-    echo "using hard links after which all modifications are synchronised [via rsync]."
-    echo "Each snapshot is stored with its creation date and a softlink named 'last'"
+    echo "using hard links after which all modifications are synchronised via rsync."
+    echo "Each snapshot is stored with its creation date. A softlink named 'last'"
     echo "points to the latest snapshot"
 }
 
@@ -64,7 +64,7 @@ if [ -e $LNK ]; then
   fi
 fi
 
-rsync -ax --stats --delete $SRC/ $DST 2> $PREFIX/error.log | $SCRIPTDIR/parse_rsync.sh
+rsync -ax --stats -h --delete $SRC/ $DST 2> $PREFIX/error.log
 echo_lap $LAP "rsyncing"
 
 touch $DST
