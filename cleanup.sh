@@ -1,9 +1,37 @@
 #!/bin/bash
 
+SCRIPTNAME=$(basename $0)
+SCRIPTDIR=$(dirname $0)
+
 DOW="Friday"  # which weekday must be kept
 MAXWEEK=52    # how many weekdays must be kept
 MAXDAY=31     # how many days must be kept
 MAXHOUR=1     # how many hours must be kept: MAXHOUR*24 hours
+
+function usage {
+    echo "$SCRIPTNAME"
+    echo ""
+    echo "usage: $SCRIPTNAME <SNAPSYNC DIR>"
+    echo "  <SNAPSYNC DIR>    location where all backups are stored"
+    echo ""
+    echo "description: Cleanup snapsync backups according to retention scheme"
+    echo ""
+    echo "With every call of $SCRIPTNAME the snapsync directory is cleaned up"
+    echo "according to the retention scheme. Only the following snapshots are kept:"
+    echo "1. the oldest one"
+    echo "2. the first backup in a month"
+    echo "3. Every $DOW [SNAPSYNC_DOW] of the last $MAXWEEK [SNAPSYNC_MAXWEEK] weeks"
+    echo "4. Every first backup of the last $MAXDAY [SNAPSYNC_MAXDAY] days"
+    echo "5. Every backup in the last $(echo $MAXHOUR*24 | bc) [SNAPSYNC_MAXHOUR] hours"
+    echo "note: the retention scheme can be easily modified using the environment"
+    echo "variables shown in square brackets."
+}
+
+if [ $# != 2 ];
+then
+  usage
+  exit 1
+fi
 
 # first backup ever
 first=`ls -td 2* | tail -1`
