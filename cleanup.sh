@@ -81,7 +81,9 @@ then
 fi
 
 PREFIX=$1
-LNK=$PREFIX/last
+if ! [ -d $PREFIX ] ; then
+  echo "Error: directory $PREFIX does not exist" >&2; exit 1
+fi
 LCK=$PREFIX/lock
 
 # determine laptime and echo result
@@ -109,6 +111,7 @@ else
 fi
 
 # first backup ever
+cd $PREFIX
 first=`ls -td 2* | tail -1`
 
 # MONTHS, keep every first backup of the month (NOTE: including the oldest!)
