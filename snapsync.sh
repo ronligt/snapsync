@@ -42,15 +42,17 @@ function echo_lap() {
   LAP=$LOCLAP
 }
 
+echo "Starting $SCRIPTNAME"
 date
 
 if [ -e $LCK ]; then
   DATE=`date -r $LCK`
-  echo "Error: lockfile $LCK exists! Most likely this script is allready running."
-  echo "       This lockfile is created on: $DATE"
+  SCRIPT=`cat $LCK`
+  echo "Error: lockfile $LCK exists! Most likely the $SCRIPT script is allready running." >&2
+  echo "       This lockfile is created on: $DATE" >&2
   exit 1
 else
-  touch $LCK
+  echo $SCRIPTNAME > $LCK
 fi
 
 DST=$PREFIX/`date +%Y%m%d%H%M%S`

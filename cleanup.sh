@@ -74,10 +74,38 @@ function usage {
     echo "variables shown in square brackets."
 }
 
-if [ $# != 2 ];
+if [ $# != 1 ];
 then
   usage
   exit 1
+fi
+
+PREFIX=$1
+LNK=$PREFIX/last
+LCK=$PREFIX/lock
+
+# determine laptime and echo result
+#   $1 = start time for lap
+#   $2 = activity for echo result
+function echo_lap() {
+  LOCLAP=`date +%s`
+  SEC=`echo $LOCLAP-$1 | bc`
+  TIME=`date -d "1970-1-1 +$SEC seconds" +%T`
+  echo "Done $2 in $TIME"
+  LAP=$LOCLAP
+}
+
+echo "Starting $SCRIPTNAME"
+date
+
+if [ -e $LCK ]; then
+  DATE=`date -r $LCK`
+  SCRIPT=`cat $LCK`
+  echo "Error: lockfile $LCK exists! Most likely the $SCRIPT script is allready running." >&2
+  echo "       This lockfile is created on: $DATE" >&2
+  exit 1
+else
+  echo $SCRIPTNAME > $LCK
 fi
 
 # first backup ever
@@ -154,3 +182,9 @@ findstr=$(echo $findstr " ! -mtime -$MAXHOUR")
 #find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
 echo $findstr
 find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
+
+echo_lap $START "total script"
+
+echo "============================"
+
+rm -f $LCK
