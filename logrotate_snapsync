@@ -1,0 +1,7 @@
+/snapsync/*.log {
+    rotate 3
+	monthly
+	missingok
+	compress
+	notifempty
+}
