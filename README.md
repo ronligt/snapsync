@@ -6,7 +6,7 @@ A cleanup script is included to preserve snapshots via a retention scheme. By de
 
 1. the oldest one
 1. the first backup in a month
-1. the first backup on every Friday [`SNAPSYNC_DOW`] of the last 4 [`SNAPSYNC_MAXWEEK`] weeks
+1. the first backup on every Sunday [`SNAPSYNC_DOW`] of the last 4 [`SNAPSYNC_MAXWEEK`] weeks
 1. Every first backup of the last 7 [`SNAPSYNC_MAXDAY`] days
 1. Every backup in the last 24 [`SNAPSYNC_MAXHOUR`] hours
 
