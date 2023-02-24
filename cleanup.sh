@@ -97,6 +97,7 @@ function echo_lap() {
   LAP=$LOCLAP
 }
 
+START=`date +%s`
 echo "Starting $SCRIPTNAME"
 date
 

@@ -24,8 +24,6 @@ then
   exit 1
 fi
 
-START=`date +%s`
-
 SRC=$1
 PREFIX=$2
 LNK=$PREFIX/last
@@ -42,6 +40,7 @@ function echo_lap() {
   LAP=$LOCLAP
 }
 
+START=`date +%s`
 echo "Starting $SCRIPTNAME"
 date
 
