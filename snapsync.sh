@@ -28,6 +28,7 @@ SRC=$1
 PREFIX=$2
 LNK=$PREFIX/last
 LCK=$PREFIX/lock
+MDB=$PREFIX/mlocate.db
 
 # determine laptime and echo result
 #   $1 = start time for lap
@@ -75,8 +76,8 @@ touch $DST
 unlink $LNK
 ln -s $DST $LNK
 
-#/usr/local/bin/updatedb -U $DST -o $DST/mlocate.db
-#echo_lap $LAP "updating mlocate.db"
+updatedb -U $PREFIX -o $MDB
+echo_lap $LAP "updating mlocate.db"
 
 echo_lap $START "total script"
 
