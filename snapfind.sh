@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Also nice to compare with...
+find /data/snapsync/home -name "$1" -printf "%i %p %kk\n" 2> /dev/null | sort -n | uniq -w 10 | cut -f 2- -d' '
+
 # paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | sort -t'/' -k6)
 paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -hism | sort)
 # echo $paths
