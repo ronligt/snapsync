@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | sort -t'/' -k6)
-paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -i)
+paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -im | sort)
 echo $paths
 
+IFS=','
 prev_inode=""
 for path in $paths
 do
@@ -27,3 +28,4 @@ do
         prev_snapdate=$snapdate
     fi
 done
+unset IFS
