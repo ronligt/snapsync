@@ -9,13 +9,13 @@ prev_inode=""
 for path in $paths
 do
     path=$(echo $path|tr -d '\n')
-    echo $path
+    # echo $path
     snapdate=$(echo -n $path|cut -f5 -d'/')
-    echo $snapdate
+    # echo $snapdate
     inode=$(echo -n $path|cut -f1 -d' ')
-    echo $inode
+    # echo $inode
     snappath=$(echo -n $path|cut -f6- -d'/')
-    echo $snappath
+    # echo $snappath
     if [[ "$inode" != "$prev_inode" ]];
     then
         if [[ "$prev_inode" != "" ]];
