@@ -1,6 +1,6 @@
 #!/bin/bash
 
-paths=$(locate --database /data/snapsync/home | sort)
+paths=$(locate --database /data/snapsync/home $1 | sort)
 
 for path in $paths
 do
