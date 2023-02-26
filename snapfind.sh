@@ -8,6 +8,7 @@ IFS=','
 prev_inode=""
 for path in $paths
 do
+    path=$(echo $path|tr -d '\n')
     echo $path
     snapdate=$(echo -n $path|cut -f5 -d'/')
     echo $snapdate
