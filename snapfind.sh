@@ -15,9 +15,9 @@ do
     echo $inode
     snappath=$(echo $path|cut -f6- -d'/')
     echo $snappath
-    if ( "$inode" -eq "$prev_inode" );
+    if [[ "$inode" == "$prev_inode" ]];
     then
-        if ( "$prev_inode" -neq "" );
+        if [[ "$prev_inode" != "" ]];
         then
             echo "    identical from " $first_snapdate to $prev_snapdate
         fi
