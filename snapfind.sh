@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | sort -t'/' -k6)
-paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -im | sort)
-echo $paths
+paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -hism | sort)
+# echo $paths
 
 IFS=','
 prev_inode=""
@@ -16,13 +16,14 @@ do
     # echo $inode
     snappath=$(echo -n $path|cut -f6- -d'/')
     # echo $snappath
+    size=$(echo -n $path|cut -f2 -d' ')
     if [[ "$inode" != "$prev_inode" ]];
     then
         if [[ "$prev_inode" != "" ]];
         then
             echo "    identical from " $first_snapdate to $prev_snapdate
         fi
-        echo $snappath "first occurence on" $snapdate
+        echo $snappath $size "first occurence on" $snapdate
         first_snapdate=$snapdate
         prev_inode=$inode
     else
