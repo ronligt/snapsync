@@ -3,16 +3,16 @@
 # paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | sort -t'/' -k6)
 paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -i)
 
-prev_inode=0
+prev_inode=""
 for path in $paths
 do
     echo $path
     snapdate=$(echo $path|cut -f5 -d'/')
     inode=$(echo $path|cut -f1 -d' ')
     snappath=$(echo $path|cut -f6- -d'/')
-    if [ $inode != $prev_inode ];
+    if ( "$inode" -eq "$prev_inode" );
     then
-        if [ $prev_inode != 0 ];
+        if ( "$prev_inode" -neq "" );
         then
             echo "    identical from " $first_snapdate to $prev_snapdate
         fi
