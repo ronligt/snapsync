@@ -8,8 +8,11 @@ for path in $paths
 do
     echo $path
     snapdate=$(echo $path|cut -f5 -d'/')
+    echo $snapdate
     inode=$(echo $path|cut -f1 -d' ')
+    echo $inode
     snappath=$(echo $path|cut -f6- -d'/')
+    echo $snappath
     if ( "$inode" -eq "$prev_inode" );
     then
         if ( "$prev_inode" -neq "" );
