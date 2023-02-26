@@ -2,6 +2,7 @@
 
 # paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | sort -t'/' -k6)
 paths=$(locate --database /data/snapsync/home/mlocate.db $1 | sort | xargs ls -i)
+echo $paths
 
 prev_inode=""
 for path in $paths
