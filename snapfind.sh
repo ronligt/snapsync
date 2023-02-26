@@ -16,7 +16,7 @@ do
         then
             echo "    identical from " $first_snapdate to $prev_snapdate
         fi
-        echo $snappath "first occurence"
+        echo $snappath "first occurence on" $snapdate
         first_snapdate=$snapdate
         prev_inode=$inode
     else
