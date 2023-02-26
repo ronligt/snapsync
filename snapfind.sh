@@ -15,7 +15,7 @@ do
     echo $inode
     snappath=$(echo $path|cut -f6- -d'/')
     echo $snappath
-    if [[ "$inode" == "$prev_inode" ]];
+    if [[ "$inode" != "$prev_inode" ]];
     then
         if [[ "$prev_inode" != "" ]];
         then
