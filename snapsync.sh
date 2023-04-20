@@ -25,18 +25,28 @@ then
   exit 1
 fi
 
-SRC=$1
+SRC=$(realpath $1)
 if ! [ -d $SRC ] ; then
   echo "Error: source directory $SRC does not exist" >&2; exit 1
 fi
 
-PREFIX=$2
+PREFIX=$(realpath $2)
 if ! [ -d $PREFIX ] ; then
   echo "Error: snapsync directory $PREFIX does not exist" >&2; exit 1
 fi
 LNK=$PREFIX/last
 LCK=$PREFIX/lock
 MDB=$PREFIX/mlocate.db
+
+# Determine if the target dir is inside the source directory.
+# eg. when creating a snapshot o whole partition
+
+if [[ $PREFIX =~ $SRC ]] ; then
+    echo "Snapshot directory $PREFIX is in source directory $SRC. Excluding the snapshot directory"
+    RELATIVE=${PREFIX#"$SRC/"}
+    EXCLUDE="--exclude $RELATIVE"
+fi
+
 
 # determine laptime and echo result
 #   $1 = start time for lap
@@ -68,7 +78,7 @@ DST=$PREFIX/`date +%Y%m%d%H%M%S`
 if [ -e $LNK ]; then
   if [ -h $LNK ]; then
     PREV=`readlink -f $LNK`
-    cp -al $PREV $DST
+    cp --archive --link $PREV $DST
     echo_lap $START "copying $PREV to $DST"
   else
     echo "Error: $LNK exists but is not a symbolic link!"
@@ -76,7 +86,7 @@ if [ -e $LNK ]; then
   fi
 fi
 
-rsync -ax --stats -h --delete $SRC/ $DST 2> $PREFIX/error.log
+rsync -ax --stats -h --delete $EXCLUDE $SRC/ $DST 2> $PREFIX/error.log
 echo_lap $START "rsyncing"
 
 touch $DST
@@ -84,7 +94,7 @@ touch $DST
 unlink $LNK
 ln -s $DST $LNK
 
-updatedb -U $PREFIX -o $MDB
+updatedb --database-root $PREFIX --require-visibility 0 --output $MDB
 echo_lap $LAP "updating mlocate.db"
 
 echo_lap $START "total script"

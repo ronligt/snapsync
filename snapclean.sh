@@ -80,7 +80,7 @@ then
   exit 1
 fi
 
-PREFIX=$1
+PREFIX=$(realpath $1)
 if ! [ -d $PREFIX ] ; then
   echo "Error: snapsync directory $PREFIX does not exist" >&2; exit 1
 fi
@@ -190,7 +190,7 @@ find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \
 # find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
 echo_lap $START "cleaning up"
 
-updatedb -U $PREFIX -o $MDB
+updatedb --database-root $PREFIX --require-visibility 0 --output $MDB
 echo_lap $LAP "updating mlocate.db"
 
 echo_lap $START "total script"
