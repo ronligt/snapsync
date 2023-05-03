@@ -100,7 +100,7 @@ function echo_lap() {
 
 START=`date +%s`
 echo "Starting $SCRIPTNAME"
-date
+date -R
 
 if [ -e $LCK ]; then
   DATE=`date -r $LCK`
@@ -114,7 +114,7 @@ fi
 
 # first backup ever
 cd $PREFIX
-first=`ls -td 2* | tail -1`
+first=`ls -rd 2* | tail -1`
 
 # MONTHS, keep every first backup of the month (NOTE: including the oldest!)
 i=0
@@ -186,8 +186,8 @@ findstr=$(echo $findstr " ! -mtime -$MAXHOUR")
 
 echo "Removing:"
 find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n" -exec rm -rf {} \;
-# echo $findstr
-# find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
+#echo $findstr
+#find . -maxdepth 1 -mindepth 1 -type d $findstr -printf "%f\n"
 echo_lap $START "cleaning up"
 
 updatedb --database-root $PREFIX --require-visibility 0 --output $MDB

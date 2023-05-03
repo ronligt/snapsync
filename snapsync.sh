@@ -61,7 +61,7 @@ function echo_lap() {
 
 START=`date +%s`
 echo "Starting $SCRIPTNAME"
-date
+date -R
 
 if [ -e $LCK ]; then
   DATE=`date -r $LCK`
